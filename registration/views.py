@@ -13,6 +13,7 @@ def register(request):
         team_name=request.POST.get('team_name')
         game=request.POST.get('GAME')
         tl_email=request.POST.get('Email')
+        phone = request.POST.get('Phno')
         if (Team.objects.filter(team_name=team_name).exists()):
             message(request,'Team name already exists')
         if (Team.objects.filter(email=tl_email).exists()):
@@ -58,7 +59,7 @@ def register(request):
         if (Participant.objects.filter(roll=p4_rollno).exists()):
             return render(request,'message.html',{'message':'Player 4 Roll number already exists'})
         
-        team = Team(team_name=team_name,game=game,email=tl_email)
+        team = Team(team_name=team_name,game=game,email=tl_email, phone=phone)
         team.save()
         tl = Participant.objects.create(name=tl_name,roll=tl_rollno,branch=tl_branch,year=tl_year,game_id=tl_id,team=Team.objects.get(team_name=team_name))
         tl.save()
@@ -82,15 +83,16 @@ def FIFA(request):
         branch = request.POST.get('Branch')
         year = request.POST.get('YEAR')
         game_id = request.POST.get('ID1')
+        phone = request.POST.get('Phno')
         
         if (Participant.objects.filter(roll=rollno).exists()):
             player = Participant.objects.get(roll=rollno)
             player.FIFA = True
             player.save()
         else:
-            player = Participant.objects.create(name=name,roll=rollno,branch=branch,year=year,FIFA=True,game_id=game_id)
+            player = Participant.objects.create(name=name,roll=rollno,branch=branch,year=year,FIFA=True,game_id=game_id,phone=phone)
             player.save()
-        Team.objects.create(team_name=name+" "+rollno,game='FIFA',email=email)
+        Team.objects.create(team_name=name+"_"+rollno,game='FIFA',email=email)
         return render(request,'message.html',{'message':'Registration Successful'})
     return render(request,'fifa.html')
 

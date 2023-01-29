@@ -10,7 +10,7 @@ class Team(models.Model):
     team_name = models.CharField(max_length=255, blank=False, null=False, unique=True)
     game = models.CharField(max_length=255, blank=False, null=False)
     email = models.EmailField(max_length=255, blank=False, null=False)
-    
+    phone = models.CharField(max_length=20, blank=True, null=True)
     # team_leader_email = models.EmailField(max_length=255, blank=False, null=False, unique=True)
     # team_leader_name = models.CharField(max_length=255, blank=False, null=False)
     # team_leader_roll = models.CharField(max_length=255, blank=False, null=False, unique=True)

@@ -13,9 +13,9 @@ class TeamResource(resources.ModelResource):
         
 class TeamAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = TeamResource
-    list_display = ['team_name','game','email']
+    list_display = ['team_name','game','email','phone']
     list_filter = ['game']
-    search_fields = ['team_name','game','email']
+    search_fields = ['team_name','game','email', 'phone']
     
 admin.site.register(Team, TeamAdmin)
 class ParticipantResource(resources.ModelResource):
