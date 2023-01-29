@@ -1,0 +1,521 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'orion.css' %}">
+    <title>ORION</title>
+    <style>
+        body{
+            background-image: url("{% static 'gameimg.jpg' %}");
+        }
+        label {
+            display: block;
+            margin-bottom: 1.5em;
+        }
+         label > input {
+            display: none;
+        }
+         label > i {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+            border: 2px solid purple;
+            transition: 0.25s;
+        }
+         label > span {
+            display: inline-block;
+            padding-bottom: 3px;
+            border-bottom: 2px dotted #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9em;
+        }
+         label > input:checked + i {
+            box-shadow: inset 0 0 0 5px purple;
+        }
+        .select-container {
+            position: relative;
+            margin: 0 auto;
+            width: 300px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        .select-container .select {
+            position: relative;
+            background: #0f0e11;
+            height: 60px;
+        }
+        
+        .select-container .select::after {
+            position: absolute;
+            content: "";
+            width: 15px;
+            height: 15px;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%) rotate(45deg);
+            border-bottom: 2px solid white;
+            border-right: 2px solid white;
+            cursor: pointer;
+            transition: border-color 0.4s;
+        }
+        
+        .select-container.active .select::after {
+            border: none;
+            border-left: 2px solid white;
+            border-top: 2px solid white;
+        }
+        .select-container .select input {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+            background: none;
+            outline: none;
+            border: none;
+            font-size: 1.4rem;
+            color: white;
+            cursor: pointer;
+        }
+        .select-container .option-container {
+            position: relative;
+            background: #6e6477;
+            height: 0;
+            overflow-y: scroll;
+            transition: 0.4s;
+        }
+        
+        .select-container.active .option-container {
+            height: 120px;
+        }
+        
+        .select-container .option-container::-webkit-scrollbar {
+            border-left: 1px solid rgba(0, 0, 0, 0.2);
+            width: 10px;
+        }
+        
+        .select-container .option-container::-webkit-scrollbar-thumb {
+            background: #0f0e11;
+        }
+        
+        .select-container .option-container .option {
+            position: relative;
+            padding-left: 15px;
+            height: 60px;
+            border-top: 1px solid rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: 0.2s;
+        }
+        
+        .select-container .option-container .option.selected {
+            background: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+        
+        .select-container .option-container .option:hover {
+            background: rgba(0, 0, 0, 0.2);
+            padding-left: 20px;
+        }
+        
+        .select-container .option-container .option label {
+            font-size: 1.1rem;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <img src="{% static 'gameimg.jpg' %}" class="bg" alt="">
+    <div class="overlay"></div>
+    <section class="left">
+        <h1> GAMERS SHOWDOWN </h1>
+        <p class="about">Gear up and geek out as we bring to you a series of enthralling esports events to get your
+            adrenaline kick
+            in.
+              Be ready to showcase your gaming aptitude in this race against invincible streaks and limitless potential.
+            Battle it out amongst the best in rounds of FIFA, Call of Duty and Valorant.
+            No time to cooldown as Gamers Showdown is just around the corner</p>
+
+    </section>
+    <section class="right">
+        <!-- <h4><a href ="click">Click here to register yourself for fifa.</a> </h4> -->
+        <center><a href="{% url 'FIFA' %}"><button> <h6>Click here For FIFA</h6></button></a></center>
+        <h3>Team Leader Details</h3>
+        
+            <form method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+                <div class="inputContainer">
+                    <label for="email">Email</label>
+                    <input type="email" name="Email" id="email" autofocus required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="name">Name </label>
+                    <input type="text" name="name" required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="rollno">Roll No.</label>
+                    <input type="number" name="rollno"  autofocus required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="Branch">Branch</label>
+                    <input type="text" name="Branch" required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="YEAR">YEAR </label>
+                    <fieldset>
+                        
+                        <p>
+                            <label class="radio-inline">
+                                <input type="radio" name="YEAR" checked/>
+                                <i></i>
+                                <span>1st Year</span>
+                              </label>
+                              <label class="radio-inline">
+                                <input type="radio" name="YEAR"/>
+                                <i></i>
+                                <span>2nd Year</span>
+                              </label>
+                              <label>
+                                <input type="radio" name="YEAR"/>
+                                <i></i>
+                                <span>3rd Year</span>
+                              </label>
+                              <label>
+                                <input type="radio" name="YEAR"/>
+                                <i></i>
+                                <span>4th Year</span>
+                              </label>
+                              <label>
+                                 <input type="radio" name="YEAR"/>
+                                 <i></i>
+                                 <span>PG Year</span>
+                               </label>
+            
+                        </p>
+                    </fieldset>
+                    <div class="inputContainer1"> 
+                            
+                        <p><h1>GAME:</h1> 
+            <!-- <select name="GAME" id="GAME"required>
+                <option value="select options">select options</option>
+                <option value="VALORANT">VALORANT</option>
+                <option value="CODM">CODM</option>
+            </select> -->
+            <div class="select-container">
+                <div class="select">
+                    <input type="text" id="input" placeholder="select" name="GAME" bonfocus="this.blur();">
+                </div>
+                <div class="option-container">
+                    <div class="option">
+                        <option value="VALORANT">VALORANT</option>
+                    </div>
+                    <div class="option" >
+                        <option value="CODM">CODM</option>
+                    </div>
+                    
+                </div>
+            </div><br><br>
+            <br>
+            <div class="inputContainer">
+                <label for="id">VALO / CODM id</label>
+                <input type="text" name="ID" required />
+            </div>
+            <br>
+            <div class="inputContainer">
+                <label for="team_name">Team Name</label>
+                <input type="text" name="team_name" required />
+            </div>
+        </p>
+        <div >
+            <br>
+            <h3>Player 1 Details </h3>
+            <br>
+                <div class="inputContainer">
+                    <label for="NAME1">Name </label>
+                    <input type="name" name="NAME1" required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="ROLLNO1">Roll No.</label>
+                    <input type="number" name="ROLLNO1"  autofocus required />
+                </div>
+                <br>
+                <div class="inputContainer">    
+                    <label for="Branch1">Branch</label>
+                    <input type="text" name="Branch1" required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="YEAR">YEAR </label>
+                    <fieldset>
+                        
+                        <p>
+                            <label class="radio-inline">
+                                <input type="radio" name="YEAR1" checked/>
+                                <i></i>
+                                <span>1st Year</span>
+                              </label>
+                              <label class="radio-inline">
+                                <input type="radio" name="YEAR1"/>
+                                <i></i>
+                                <span>2nd Year</span>
+                              </label>
+                              <label>
+                                <input type="radio" name="YEAR1"/>
+                                <i></i>
+                                <span>3rd Year</span>
+                              </label>
+                              <label>
+                                <input type="radio" name="YEAR1"/>
+                                <i></i>
+                                <span>4th Year</span>
+                              </label>
+                              <label>
+                                 <input type="radio" name="YEAR1"/>
+                                 <i></i>
+                                 <span>PG Year</span>
+                               </label>
+                              
+            
+                        </p>
+                    </fieldset>
+                    <br><br>
+                    <div class="inputContainer">
+                        <label for="ID1">Valo/Codm id</label>
+                        <input type="text" name="ID1" required />
+                    </div>
+            </div>
+            <div >
+                <br>
+                <h3>Player 2 Details</h3>
+                <br>
+    
+                    
+                    <div class="inputContainer">
+                        <label for="NAME2">Name </label>
+                        <input type="name" name="NAME2" required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="ROLLNO2">Roll No.</label>
+                        <input type="number" name="ROLLNO2"  autofocus required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="BRANCH2">Branch</label>
+                        <input type="text" name="BRANCH2" required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="YEAR">YEAR </label>
+                        <fieldset>
+                            
+                            <p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="YEAR2" checked/>
+                                    <i></i>
+                                    <span>1st Year</span>
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="YEAR2"/>
+                                    <i></i>
+                                    <span>2nd Year</span>
+                                  </label>
+                                  <label>
+                                    <input type="radio" name="YEAR2"/>
+                                    <i></i>
+                                    <span>3rd Year</span>
+                                  </label>
+                                  <label>
+                                    <input type="radio" name="YEAR2"/>
+                                    <i></i>
+                                    <span>4th Year</span>
+                                  </label>
+                                  <label>
+                                     <input type="radio" name="YEAR2"/>
+                                     <i></i>
+                                     <span>PG Year</span>
+                                   </label>
+                
+                            </p>
+                        </fieldset>
+                        <div class="inputContainer">
+                            <label for="ID2">Valo/Codm id</label>
+                            <input type="text" name="ID2" required />
+                        </div>
+                </div>
+            </div>
+            <div >
+                <br>
+                <h3>Player 3 Details</h3>
+                <br>
+    
+                    
+                    <div class="inputContainer">
+                        <label for="NAME3">Name </label>
+                        <input type="name" name="NAME3" required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="ROLLNO3">Roll No.</label>
+                        <input type="number" name="ROLLNO3"  autofocus required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="BRANCH3">Branch</label>
+                        <input type="text" name="BRANCH3" required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="YEAR">YEAR </label>
+                        <fieldset>
+                            
+                            <p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="YEAR3" checked/>
+                                    <i></i>
+                                    <span>1st Year</span>
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="YEAR3"/>
+                                    <i></i>
+                                    <span>2nd Year</span>
+                                  </label>
+                                  <label>
+                                    <input type="radio" name="YEAR3"/>
+                                    <i></i>
+                                    <span>3rd Year</span>
+                                  </label>
+                                  <label>
+                                    <input type="radio" name="YEAR3"/>
+                                    <i></i>
+                                    <span>4th Year</span>
+                                  </label>
+                                  <label>
+                                     <input type="radio" name="YEAR3"/>
+                                     <i></i>
+                                     <span>PG Year</span>
+                                   </label>
+                
+                            </p>
+                        </fieldset>
+                        <div class="inputContainer">
+                            <label for="ID3">Valo/Codm id</label>
+                            <input type="text" name="ID3" required />
+                        </div>
+                </div>
+            </div>
+            <div >
+                <br>
+                <h3>Player 4 Details</h3>
+                <br>
+    
+                    
+                    <div class="inputContainer">
+                        <label for="NAME4">Name </label>
+                        <input type="name" name="NAME4" required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="ROLLNO4">Roll No.</label>
+                        <input type="number" name="ROLLNO4"  autofocus required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="BRANCH4">Branch</label>
+                        <input type="text" name="BRANCH4" required />
+                    </div>
+                    <br>
+                    <div class="inputContainer">
+                        <label for="YEAR">YEAR </label>
+                        <fieldset>
+                            
+                            <p>
+                                <label class="radio-inline">
+                                    <input type="radio" name="YEAR4" checked/>
+                                    <i></i>
+                                    <span>1st Year</span>
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" name="YEAR4"/>
+                                    <i></i>
+                                    <span>2nd Year</span>
+                                  </label>
+                                  <label>
+                                    <input type="radio" name="YEAR4"/>
+                                    <i></i>
+                                    <span>3rd Year</span>
+                                  </label>
+                                  <label>
+                                    <input type="radio" name="YEAR4"/>
+                                    <i></i>
+                                    <span>4th Year</span>
+                                  </label>
+                                  <label>
+                                     <input type="radio" name="YEAR4"/>
+                                     <i></i>
+                                     <span>PG Year</span>
+                                   </label>
+                
+                            </p>
+                        </fieldset>
+                        <div class="inputContainer">
+                            <label for="ID4">Valo/Codm id</label>
+                            <input type="text" name="ID4" required />
+                        </div>
+                </div> 
+            </div>
+            <br><hr><br>
+                    
+               
+
+            <p>
+                <center><button type="submit">SUBMIT</button></center>
+                
+               
+              </p>
+            </form>
+
+    </section>
+   
+</body>
+<script>
+    let selectContainer = document.querySelector(".select-container");
+let select = document.querySelector(".select");
+let input = document.getElementById("input");
+let options = document.querySelectorAll(".select-container .option");
+
+select.onclick = () => {
+    selectContainer.classList.toggle("active");
+};
+
+options.forEach((e) => {
+    e.addEventListener("click", () => {
+        input.value = e.innerText;
+        selectContainer.classList.remove("active");
+        options.forEach((e) => {
+            e.classList.remove("selected");
+        });
+        e.classList.add("selected");
+    });
+});
+</script>
+
+</html>

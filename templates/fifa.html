@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'orion.css' %}">
+    <title>ORION</title>
+    <style>
+        body{
+            background-image: url("{% static 'gameimg.jpg' %}");
+        }
+        label {
+            display: block;
+            margin-bottom: 1.5em;
+        }
+         label > input {
+            display: none;
+        }
+         label > i {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+            border: 2px solid purple;
+            transition: 0.25s;
+        }
+         label > span {
+            display: inline-block;
+            padding-bottom: 3px;
+            border-bottom: 2px dotted #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9em;
+        }
+         label > input:checked + i {
+            box-shadow: inset 0 0 0 5px purple;
+        }
+        
+    </style>
+</head>
+
+
+
+
+<body>
+    <img src="{% static 'gameimg.jpg' %}" class="bg" alt="">
+    <div class="overlay"></div>
+    <section class="left">
+        <h1> GAMERS SHOWDOWN [FIFA]</h1>
+        <p class="about">Gear up and geek out as we bring to you a series of enthralling esports events to get your
+            adrenaline kick
+            in.
+              Be ready to showcase your gaming aptitude in this race against invincible streaks and limitless potential.
+            Battle it out amongst the best in rounds of FIFA, Call of Duty and Valorant.
+            No time to cooldown as Gamers Showdown is just around the corner</p>
+
+    </section>
+    <section class="right">
+        
+        <a href="{% url 'register' %}"><button><h6>Go Back</h6></button></a><br><hr><br>
+        <h3>Player Details</h3>
+        
+            <form method="post" action="{% url 'FIFA' %}">
+                {% csrf_token %}
+                <div class="inputContainer">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" autofocus required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="name">Name </label>
+                    <input type="text" name="name" required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="rollno">Roll No.</label>
+                    <input type="number" name="rollno"  autofocus required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="Branch">Branch</label>
+                    <input type="text" name="Branch" required />
+                </div>
+                <br>
+                <div class="inputContainer">
+                    <label for="YEAR">YEAR </label>
+                    <fieldset>
+                        
+                        <p>
+                            <label class="radio-inline">
+                                <input type="radio" name="YEAR" checked/>
+                                <i></i>
+                                <span>1st Year</span>
+                              </label>
+                              <label class="radio-inline">
+                                <input type="radio" name="YEAR"/>
+                                <i></i>
+                                <span>2nd Year</span>
+                              </label>
+                              <label>
+                                <input type="radio" name="YEAR"/>
+                                <i></i>
+                                <span>3rd Year</span>
+                              </label>
+                              <label>
+                                <input type="radio" name="YEAR"/>
+                                <i></i>
+                                <span>4th Year</span>
+                              </label>
+                              <label>
+                                 <input type="radio" name="YEAR"/>
+                                 <i></i>
+                                 <span>PG Year</span>
+                               </label>
+            
+                        </p>
+                    </fieldset>
+                    <div class="inputContainer"><br>
+                        <label for="ID1">Fifa ID</label>
+                        <input type="text" name="ID1" required />
+                    </div><br><hr><br>
+                    
+               
+
+            <p>
+                <button type="submit">Submit now</button>
+                
+               
+              </p>
+            </form>
+
+    </section>
+   
+</body>
+
+</html>
