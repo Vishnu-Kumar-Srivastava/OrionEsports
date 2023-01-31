@@ -98,3 +98,4 @@ def FIFA(request):
 
 def message(request,mess):
     return render(request,'message.html',{'message':mess})
+
