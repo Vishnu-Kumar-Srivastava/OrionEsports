@@ -90,9 +90,9 @@ def FIFA(request):
             player.FIFA = True
             player.save()
         else:
-            player = Participant.objects.create(name=name,roll=rollno,branch=branch,year=year,FIFA=True,game_id=game_id,phone=phone)
+            player = Participant.objects.create(name=name,roll=rollno,branch=branch,year=year,FIFA=True,game_id=game_id)
             player.save()
-        Team.objects.create(team_name=name+"_"+rollno,game='FIFA',email=email)
+        Team.objects.create(team_name=name+"_"+rollno,game='FIFA',email=email, phone=phone)
         return render(request,'message.html',{'message':'Registration Successful'})
     return render(request,'fifa.html')
 
