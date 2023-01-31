@@ -15,7 +15,7 @@ def register(request):
         tl_email=request.POST.get('Email')
         phone = request.POST.get('Phno')
         if (Team.objects.filter(team_name=team_name).exists()):
-            message(request,'Team name already exists')
+            return render(request,'message.html',{'message':'Team Name already exists'})
         if (Team.objects.filter(email=tl_email).exists()):
             return render(request,'message.html',{'message':'Email already exists'})
         

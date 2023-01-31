@@ -76,7 +76,7 @@ class Participant(models.Model):
     name = models.CharField(max_length=255, blank=False, null=False, default="Participant")
     roll = models.CharField(max_length=255, blank=False, null=False, unique=True)
     branch = models.CharField(max_length=100, blank=False, null=False, default=" ")
-    year = models.CharField(max_length=50, blank=False, null=False, default=" 1st Year")
+    year = models.CharField(max_length=50, blank=False, null=False, default="1st Year")
     # email = models.EmailField(max_length=255, blank=False, null=False, unique=True)
     game_id = models.CharField(max_length=255, blank=False, null=False, default=' ')
     team = models.ForeignKey(Team, on_delete=models.CASCADE, blank=True, null=True)
